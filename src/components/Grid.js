@@ -821,7 +821,7 @@ export default class Grid extends Component<Props, State> {
     let transmissionProbabilitySlider = null;
     if (showAll || this.props.showTransmissionProbabilitySlider) {
       transmissionProbabilitySlider =
-          this.renderSlider("Transmission rate", this.state.transmissionProbability,
+          this.renderSlider("Taux de transmission", this.state.transmissionProbability,
               (e, value) => { this.setState({transmissionProbability: value}); },
               0, this.props.maxTransmissionRate, 0.01, false, this.props.highlight === "transmissionRate");
     }
@@ -844,7 +844,7 @@ export default class Grid extends Component<Props, State> {
       //         (e, value) => { this.setState({hospitalCapacitySliderHighlighted: true}); },
       //         0, 1, 0.01, true, this.state.hospitalCapacitySliderHighlighted);
       hospitalCapacitySlider =
-          this.renderSlider("Hospital capacity", this.state.hospitalCapacityPct,
+          this.renderSlider("Capacité des hôpitaux", this.state.hospitalCapacityPct,
               (e, value) => { this.setState({hospitalCapacityPct: value}); },
               0, 1, 0.01, true, false);
 
@@ -853,7 +853,7 @@ export default class Grid extends Component<Props, State> {
     let travelRadiusSlider = null;
     if (showAll || this.props.showTravelRadiusSlider) {
       travelRadiusSlider =
-          this.renderSlider("Travel radius", this.state.travelRadius,
+          this.renderSlider("Rayon de déplacement", this.state.travelRadius,
               (e, value) => { this.setState({travelRadius: value}); },
               0, Math.min(30, Math.floor(this.props.gridRows/2)), 1, false, false);
     }
@@ -861,7 +861,7 @@ export default class Grid extends Component<Props, State> {
     let personHoursSlider = null;
     if (showAll || this.props.showPersonHoursSlider) {
       personHoursSlider =
-          this.renderSlider("Encounters per day", this.state.personHours,
+          this.renderSlider("Rencontres par jour", this.state.personHours,
               (e, value) => { this.setState({personHours: value}); },
               1, 30, 1, false, false);
     }
@@ -869,7 +869,7 @@ export default class Grid extends Component<Props, State> {
     let daysIncubatingSlider = null;
     if (showAll || this.props.showDaysPerStateControls) {
       daysIncubatingSlider =
-          this.renderSlider("Days in incubation", this.state.daysIncubating,
+          this.renderSlider("Jours d'incubation", this.state.daysIncubating,
               (e, value) => { this.setState({daysIncubating: value}); },
               0, 20, 1, false, false);
     }
@@ -877,7 +877,7 @@ export default class Grid extends Component<Props, State> {
     let daysSymptomaticSlider = null;
     if (showAll || this.props.showDaysPerStateControls) {
       daysSymptomaticSlider =
-          this.renderSlider("Days with symptoms", this.state.daysSymptomatic,
+          this.renderSlider("Jours avec symptômes", this.state.daysSymptomatic,
               (e, value) => { this.setState({daysSymptomatic: value}); },
               1, 20, 1, false, false);
     }
@@ -885,7 +885,7 @@ export default class Grid extends Component<Props, State> {
     let chanceOfIsolationAfterSymptomsSlider = null;
     if (showAll || this.props.showChanceOfIsolationAfterSymptomsSlider) {
       chanceOfIsolationAfterSymptomsSlider =
-          this.renderSlider("Self-quarantine rate", this.state.chanceOfIsolationAfterSymptoms,
+          this.renderSlider("Taux de quarantaine volontaire", this.state.chanceOfIsolationAfterSymptoms,
               (e, value) => { this.setState({chanceOfIsolationAfterSymptoms: value}); },
               0, 1, 0.01, true, false);
     }
@@ -893,16 +893,16 @@ export default class Grid extends Component<Props, State> {
     let decreaseInEncountersAfterSymptomsSlider = null;
     if (showAll || this.props.showDecreaseInEncountersAfterSymptomsSlider) {
       decreaseInEncountersAfterSymptomsSlider =
-          this.renderSlider("Self-quarantine strictness", this.state.decreaseInEncountersAfterSymptoms,
+          this.renderSlider("Rigueur de la quarantaine volontaire", this.state.decreaseInEncountersAfterSymptoms,
               (e, value) => { this.setState({decreaseInEncountersAfterSymptoms: value}); },
               0, 1, 0.01, true, false);
     }
 
     let deathRateSlider = null;
     if (showAll || this.props.showDeathRateSlider) {
-      let sliderName = "Fatality rate";
+      let sliderName = "Taux de mortalité";
       if (this.state.hospitalCapacityPct > -1) {
-        sliderName = "Input fatality rate";
+        sliderName = "Taux de mortalité à l'entrée";
       }
 
       deathRateSlider =
@@ -925,13 +925,13 @@ export default class Grid extends Component<Props, State> {
 
     let playbackControls = null;
     if (showAll || this.props.showPlaybackControls) {
-      let newNetworkButton = <WidgetButton onClick={() => {this.setState({playing: false}); this.generate(true); this.forceUpdate();} } >Reset</WidgetButton>;
+      let newNetworkButton = <WidgetButton onClick={() => {this.setState({playing: false}); this.generate(true); this.forceUpdate();} } >Réinit.</WidgetButton>;
       let text = <span style={{fontSize: '10pt'}}>▷</span>;
       if (this.state.playing) {
         text = <span><b>||</b></span>;
       }
       let togglePlaybackButton = <WidgetButton highlighted={!this.state.playing} onClick={() => {this.togglePlayback(); } } >{text}</WidgetButton>;
-      let stepButton = <WidgetButton onClick={() => {this.simulateStep(); this.setState({playing: false}); } } >Step</WidgetButton>;
+      let stepButton = <WidgetButton onClick={() => {this.simulateStep(); this.setState({playing: false}); } } >Étape</WidgetButton>;
 
       playbackControls =
         <div className='playback-controls-container'>
@@ -946,9 +946,9 @@ export default class Grid extends Component<Props, State> {
 
     let toggleLongDistanceNetwork = null;
     if (this.props.addLinkedNodes) {
-      let text = 'Long distance: disabled';
+      let text = 'Longue distance : désactivé';
       if (this.state.longDistaceNetworkActive) {
-        text = 'Long distance: enabled';
+        text = 'Longue distance : activé';
       }
       toggleLongDistanceNetwork = <div><span onClick={() => {this.setState({longDistaceNetworkActive: !this.state.longDistaceNetworkActive}); } } >{text}</span></div>;
     }
@@ -975,7 +975,7 @@ export default class Grid extends Component<Props, State> {
     let protip = null;
     if (this.props.showProTip) {
       protip = (
-          <div style={{color: '#666', fontSize: '12pt', marginTop: '1em'}}>👆 Pro-tip: You can adjust sliders while the simulation is running.</div>
+          <div style={{color: '#666', fontSize: '12pt', marginTop: '1em'}}>👆 Astuce : Vous pouvez ajuster les curseurs pendant la simulation.</div>
       );
     }
 

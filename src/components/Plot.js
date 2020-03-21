@@ -371,15 +371,15 @@ export default class Plot extends Component<Props, State> {
     }
 
     // let infectedCB = <label><input type="checkbox" checked={this.state.showInfected} onChange={(e) => this.setState({showInfected: e.target.checked})}/> Infected: {infectedPercent}%</label>
-    let infectedCB = <span><NodeLegend type="infected"/> &nbsp;Infected: {infectedPercent}%</span>
+    let infectedCB = <span><NodeLegend type="infected"/> &nbsp;Contaminés : {infectedPercent}%</span>
 
     // let recoveredCB = <label><input type="checkbox" checked={this.state.showRecovered} onChange={(e) => this.setState({showRecovered: e.target.checked})}/> Recovered: {recoveredPercent}%</label>
-    let recoveredCB = <span><NodeLegend type="removed"/> &nbsp;Recovered: {recoveredPercent}%</span>
+    let recoveredCB = <span><NodeLegend type="removed"/> &nbsp;Rétablis : {recoveredPercent}%</span>
 
     let deadCB = null;
     if (this.props.showDeaths) {
       // deadCB = <label><input type="checkbox" checked={this.state.showDead} onChange={(e) => this.setState({showDead: e.target.checked})}/> Dead: {deadPercent}%</label>
-      deadCB = <span><NodeLegend type="dead"/> <span style={{backgroundColor: '#FFA'}}>&nbsp;Dead: {deadPercent}%&nbsp;</span></span>
+      deadCB = <span><NodeLegend type="dead"/> <span style={{backgroundColor: '#FFA'}}>&nbsp;Morts : {deadPercent}%&nbsp;</span></span>
     }
 
     let widthToUse = this.width;
@@ -391,13 +391,13 @@ export default class Plot extends Component<Props, State> {
       <div>
         <div className="plot-container">
           {/*<div className="plot-yaxis">population</div>*/}
-          <div className="plot-xaxis">time ⟶</div>
+          <div className="plot-xaxis">temps ⟶</div>
           <div className="plot-chart">
             <canvas ref={this.canvasRef} width={widthToUse} height={this.height} />
           </div>
           <div className="plot-legend">
             <div className="plot-legend-button">
-              <WidgetButton onClick={() => {this.resetArrays()}}>Clear</WidgetButton>
+              <WidgetButton onClick={() => {this.resetArrays()}}>Effacer</WidgetButton>
             </div>
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <div>{infectedCB}</div>

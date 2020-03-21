@@ -31,35 +31,41 @@ class App extends Component<Props, State> {
       spoilerOrNot = "spoiler-revealed";
       // showSpoilerButton = <WidgetButton highlighted={false} onClick={() => { this.setState({criticalThresholdVisible: false}); } } >Hide spoilers</WidgetButton>
     }
-    showSpoilerButton = <label><span style={{cursor: "pointer"}}><input type="checkbox" value={this.state.spoilersVisible} onChange={(e) => { this.setState({spoilersVisible: e.target.checked}); }}/> Show spoilers</span></label>;
+    showSpoilerButton = <label><span style={{cursor: "pointer"}}><input type="checkbox" value={this.state.spoilersVisible} onChange={(e) => { this.setState({spoilersVisible: e.target.checked}); }}/> Afficher les résultats</span></label>;
 
 
-    let exposed_you = <code className="code-exposed">you</code>;
+    let exposed_you = <code className="code-exposed">vous</code>;
 
-    let susceptible = <code className="code-susceptible">Susceptible</code>;
-    let infected = <code className="code-infectious">Infected</code>;
-    let recovered = <code className="code-removed">Recovered</code>;
-    let dead = <code className="code-dead">Dead</code>;
-    let selfQuarantined = <code className="code-quarantined">Self-quarantined</code>;
+    let susceptible = <code className="code-susceptible">Susceptibles</code>;
+    let susceptible_singular = <code className="code-susceptible">Susceptible</code>;
+    let infected = <code className="code-infectious">Contaminés</code>;
+    let infected_singular = <code className="code-infectious">Contaminé</code>;
+    let recovered = <code className="code-removed">Rétablis</code>;
+    let recovered_singular = <code className="code-removed">Rétabli</code>;
+    let dead = <code className="code-dead">Morts</code>;
+    let selfQuarantined = <code className="code-quarantined">s'est mis en quarantaine</code>;
 
     // noinspection HtmlRequiredAltAttribute
     return (
       <div className="post-content">
         <div>
-          <h1>Outbreak</h1>
-          <h5 className="author">by Kevin Simler<br/>March 16, 2020</h5>
+          <h1>Épidémie</h1>
+          <h5 className="author">par Kevin Simler<br/>16 mars 2020<br/><small>(traduction de Boris Schapira)</small></h5>
         </div>
         <div>
-          <span className="deemphasized">Translations: <a href="https://www.podemosaprender.org/brote/">español</a>, <a href="https://thecode.media/epidemic/">Русский язык</a></span>
+          <span className="deemphasized">Original : <a href="https://meltingasphalt.com/outbreak/">English</a></span>
         </div>
         <div>
-          <a href="https://twitter.com/Harry_Stevens">Harry Stevens</a> at The Washington Post recently published a <em>very</em> elegant simulation of how a disease like COVID-19 spreads. If you haven't already, I highly recommend <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">checking it out</a>.
+          <span className="deemphasized">Autre traductions : <a href="https://www.podemosaprender.org/brote/">español</a>, <a href="https://thecode.media/epidemic/">Русский язык</a></span>
         </div>
         <div>
-          Today I want to follow up with something I've been working on: <strong>playable simulations</strong> of a disease outbreak. "Playable" means you'll get to tweak parameters (like transmission and mortality rates) and watch how the epidemic unfolds.
+          <a href="https://twitter.com/Harry_Stevens">Harry Stevens</a>, du Washington Post, a récemment publié une <em>très</em> élégante simulation de la manière dont une maladie comme le COVID-19 se répend. Si vous ne l'avez pas déjà fait, je vous recommande vraiment d'y <a href="https://www.washingtonpost.com/graphics/2020/health/corona-simulator-french/">jeter un œil</a>.
         </div>
         <div>
-          By the end of this article, I hope you'll have a better understanding — perhaps better <em>intuition</em> — for what it takes to contain this thing. But first!...
+          Aujourd'hui, je voudrais approfondir avec un projet sur lequel j'ai travaillé: <strong>des simulations interactives</strong> d'une épidémie de maladie. "Interactive" signifie que vous pourrez ajuster des paramètres (comme les taux de transmission et de mortalité) et observer le déroulement de l'épidémie.
+        </div>
+        <div>
+          À la fin de cet article, j'espère que vous aurez une meilleure compréhension (peut-être même une <em>intuition</em>) de ce qu'il faut faire pour contenir ce truc. Mais d'abord !…
         </div>
         {/*<div>*/}
         {/*  Last year, I wrote a <a href="https://meltingasphalt.com/interactive/going-critical/">viral article about viral growth</a>.*/}
@@ -71,31 +77,31 @@ class App extends Component<Props, State> {
         {/*  Today, in light of our current crisis, I wanted a chance to revisit these simulations. And you can play with them in just a moment. But first...*/}
         {/*</div>*/}
         <div>
-          <span style={{backgroundColor: '#FFC'}}><strong>AN IMPORTANT WARNING</strong></span>:
+          <span style={{backgroundColor: '#FFC'}}><strong>UN AVERTISSEMENT IMPORTANT</strong></span>:
         </div>
         <div>
-          <strong>This is <em>not</em> an attempt to model COVID-19.</strong>
+          <strong>Ceci n'est <em>pas</em> une tentative de modélisation du COVID-19.</strong>
         </div>
         <div>
-          What follows is a <em>simplified</em> model of a disease process. The goal is to learn how epidemics unfold <em>in general</em>.
+          Ce qui suit est une représentation <em>simplifiée</em> d'un phénomène de contagion. Notre objectif est d'apprendre comment se passe une épidémie <em>en général</em>.
         </div>
         <div>
-          <span>WARNING #2</span>: I'm not an epidemiologist! I defer to infectious disease experts (and so should you). I have almost certainly made mistakes in this article, but I'll correct them as quickly as I can. If you see any problems, please <a href="https://meltingasphalt.com/contact/">get in touch</a>.
+          <span>AVERTISSEMENT #2</span>: Je ne suis pas un épidémiologiste ! Je m'en remets aux experts en maladies infectieuses (et vous devriez en faire autant). J'ai presque certainement fait des erreurs dans cet article, mais je les corrigerai aussi vite que possible. Si vous constatez des problèmes, merci de <a href="https://meltingasphalt.com/contact/">me contacter (formulaire en anglais)</a>.
         </div>
         <div>
-          Alright?
+          Compris ?
         </div>
         <div>
-          Let's do this.
+          Alors c'est parti.
         </div>
         <div>
-          <h3>A grid of people</h3>
+          <h3>Une grille de personnes</h3>
         </div>
         <div>
-          We're going to build our model up slowly, one piece at a time.
+        Nous allons construire notre modèle lentement, brique après brique.
         </div>
         <div>
-          The first thing a disease needs is a <strong>population</strong>, i.e., the set of people who can potentially catch the disease. Ours will live in neat rows and columns, like the 9x9 grid you see here:
+          La première chose dont une maladie a besoin est une <strong>population</strong>, c'est-à-dire, l'ensemble des personnes qui peuvent potentiellement attraper la maladie. Les nôtres vivront dans des rangées et des colonnes bien ordonnées, comme la grille 9x9 que vous voyez ici :
         </div>
         <Figure>
           <Grid daysIncubating={0}
@@ -113,16 +119,16 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Each square represents a single person. The poor soul at the center, as you may have guessed, is {infected}. Meanwhile, everyone else is {susceptible}.
+        Chaque carré représente une seule personne. La pauvre âme au centre, comme vous l'avez peut-être deviné, est {infected_singular}. Pendant ce temps, tous les autres sont {susceptible} de l'être.
         </div>
         <div>
-          <h3>Time</h3>
+          <h3>Temps</h3>
         </div>
         <div>
-          Now let's incorporate time into our model.
+          Maintenant, incorporons le temps dans notre modèle.
         </div>
         <div>
-          The "Step" button (below) moves the simulation forward 1 day per click. Or you can press the ▷ button to watch things happen on their own:
+          Le bouton "Étape" (ci-dessous) fait avancer la simulation d'un jour par clic. Vous pouvez également appuyer sur le bouton ▷ pour voir les choses se dérouler d'elles-mêmes :
         </div>
         <Figure>
           <Grid daysIncubating={0}
@@ -140,13 +146,13 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Oh no. It looks like everyone sneezed on their immediate neighbors — north, east, south, west — and the whole world got sick.
+          Oh non. On dirait que tout le monde a éternué sur ses voisins immédiats (nord, est, sud, ouest) et que le monde entier est tombé malade.
         </div>
         <div>
-          <h3>Recovery</h3>
+          <h3>Rétablissement</h3>
         </div>
         <div>
-          But people don't stay sick forever. Let's see what happens when they get better after 2 steps (i.e., 2 days):
+          Mais les gens ne restent pas malades éternellement. Voyons ce qui se passe lorsqu'ils se rétablissent après 2 étapes (c'est-à-dire 2 jours) :
         </div>
         <Figure>
           <Grid daysIncubating={0}
@@ -164,35 +170,35 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Great, now people can transition from {infected} to {recovered}.
+          Super, maintenant les gens peuvent passer de {infected} à {recovered}.
         </div>
         <div>
-          Here's a handy legend:
+          Voici une légende bien pratique :
         </div>
         <div>
           <ul>
             <li><NodeLegend type="susceptible"/> &nbsp;<b>Susceptible</b></li>
-            <li><NodeLegend type="infected"/> &nbsp;<b>Infected</b></li>
-            <li><NodeLegend type="removed"/> &nbsp;<b>Recovered</b></li>
+            <li><NodeLegend type="infected"/> &nbsp;<b>Contaminés</b></li>
+            <li><NodeLegend type="removed"/> &nbsp;<b>Rétablis</b></li>
           </ul>
         </div>
         <div>
-          For purposes of our simulation, once someone is {recovered}, they can't get reinfected. This is hopefully (and probably) true for COVID-19, but not certain.
+          Pour les besoins de notre simulation, une fois que quelqu'un est {recovered_singular}, il ne peut pas être contaminé à nouveau. Cela est heureusement (et probablement) vrai pour COVID-19, mais ce n'est pas certain.
         </div>
         <div>
-          <h3>Incubation period</h3>
+          <h3>Période d'incubation</h3>
         </div>
         <div>
-          In discussions of COVID-19, you may have heard that the disease has a long <strong>incubation period</strong>. This is the time between when a person initially contracts the disease and the onset of first symptoms.
+          Lors des discussions sur COVID-19, vous avez peut-être entendu dire que la maladie a une longue <strong>période d'incubation</strong>. Il s'agit de la période qui s'écoule entre le moment où une personne contracte la maladie et l'apparition des premiers symptômes.
         </div>
         <div>
-          With COVID-19, it seems that patients are contagious during the incubation period. They may not even realize they're sick, but they're still able to infect others.
+          Avec COVID-19, il semble que les patients soient contagieux pendant toute la période d'incubation. Ils ne se rendent peut-être même pas compte qu'ils sont malades, mais ils sont toujours capables de contaminer d'autres personnes.
         </div>
         <div>
-          We will replicate this feature in our disease model. (But remember, we're not trying to model COVID-19 precisely!)
+          Nous allons reproduire cette caractéristique dans notre modélisation de la maladie (mais n'oubliez pas que nous n'essayons pas de modéliser COVID-19 avec précision !).
         </div>
         <div>
-          Here's what an incubation period looks like:
+          Voici à quoi ressemble une période d'incubation :
         </div>
         <Figure>
           <Grid gridRows={25}
@@ -209,39 +215,39 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          The way I've chosen to model this disease, there's no important distinction between the pink and red states. As far as the virus is concerned, both states behave the same.
+          Dans la manière dont j'ai choisi de modéliser cette maladie, il n'y a pas de distinction importante entre les états rose et rouge. En ce qui concerne le virus, les deux états se comportent de la même manière.
         </div>
         <div>
-          Nevertheless, I wanted to include the incubation period as a (visual) reminder that carriers of COVID-19 are lurking among us, hidden from the official statistics, totally unaware that they're infected.
+          Néanmoins, je voulais inclure la période d'incubation comme un rappel (visuel) que des porteurs de COVID-19 se cachent parmi nous, cachés des statistiques officielles, ignorant totalement qu'ils sont infectés.
         </div>
         <div>
-          ... unaware that they're spreading the disease to others.
+          … sans savoir qu'ils propagent la maladie à d'autres.
         </div>
         <div>
-          Even as you read this, {exposed_you} may be such a person.
+          Même {exposed_you}, qui lisez ces lignes, pouvez être concerné.
         </div>
         <div>
           <ul>
-            <li><NodeLegend type="susceptible"/> &nbsp;<b>Susceptible</b></li>
-            <li><NodeLegend type="exposed"/> &nbsp;<b>Infected (incubation period, no symptoms)</b></li>
-            <li><NodeLegend type="infected"/> &nbsp;<b>Infected (with symptoms)</b></li>
-            <li><NodeLegend type="removed"/> &nbsp;<b>Recovered</b></li>
+            <li><NodeLegend type="susceptible"/> &nbsp;<b>Susceptibles</b></li>
+            <li><NodeLegend type="exposed"/> &nbsp;<b>Contaminés (période d'incubation, pas de symptômes)</b></li>
+            <li><NodeLegend type="infected"/> &nbsp;<b>Contaminés (avec symptômes)</b></li>
+            <li><NodeLegend type="removed"/> &nbsp;<b>Rétablis</b></li>
           </ul>
         </div>
         <div>
-          <h3>Probabilistic infection</h3>
+          <h3>Probabilité de contamination</h3>
         </div>
         <div>
-          OK, enough.
+          Ok, ça suffit.
         </div>
         <div>
-          Real diseases don't spread outward with 100 percent certainty. They spread probabilistically.
+          Les vraies maladies ne se propagent pas avec une certitude absolue. Elles se propagent de manière probabiliste.
         </div>
         <div>
-          So let's introduce a new parameter: the <strong>transmission rate</strong>. This controls the chance that an infection gets passed from person to person.
+          Introduisons donc un nouveau paramètre : le <strong>taux de transmission</strong>. Cela permet de contrôler la probabilité qu'une infection se transmette d'une personne à l'autre.
         </div>
         <div>
-          Can you find a value for the transmission rate that keeps the disease from spreading to the entire population?
+          Pouvez-vous trouver une valeur pour le taux de transmission qui empêche la maladie de se propager à l'ensemble de la population ?
         </div>
         <Figure>
           <Grid gridRows={51}
@@ -261,61 +267,61 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Q: What's the <em>largest</em> transmission rate where the disease doesn't seem capable of spreading forever (e.g., reaching all four edges of the grid)?
+          Q : Quel est le taux de transmission <em>le plus grand</em> pour lequel la maladie ne semble pas pouvoir se propager indéfiniment (par exemple, atteindre les quatre bords de la grille) ?
         </div>
         <div style={{marginLeft: '2em'}}>
           {showSpoilerButton}
         </div>
         <div>
-          In my experiments, it seems to be around <span className={spoilerOrNot}>0.35</span>, maybe <span className={spoilerOrNot}>0.34</span>. Below that, I've seen the infection fizzle out every time. Above, it generally infects most of the grid.
+          Dans mes expériences, il semble se situer autour de <span className={spoilerOrNot}>0,35</span>, peut-être <span className={spoilerOrNot}>0,34</span>. En dessous de ça, j'ai vu la contamination s'interrompte à chaque fois. Au-dessus, elle infecte généralement la majeure partie de la grille.
         </div>
         <div>
-          Here's how transmission works in our disease model.
+          Voici comment la contamination fonctionne dans notre modélisation de la maladie.
         </div>
         <div>
-          Every day, each person has a fixed number of <strong>encounters</strong> with the people nearby.
+          Chaque jour, chaque personne a un nombre fixe de <strong>rencontres</strong> avec les personnes à proximité.
         </div>
         <div>
-          Thus far, we've allowed people to interact only with their immediate neighbors, for a total of 4 encounters per day. We'll vary these assumptions below.
+          Jusqu'à présent, nous avons permis aux gens de n'interagir qu'avec leurs voisins immédiats, pour un total de 4 rencontres par jour. Nous allons modifier ces hypothèses ci-dessous.
         </div>
         <div>
-          During each encounter, the transmission rate determines the probability that an {infected} person will give the disease to a {susceptible} person. The higher the transmission rate, the more likely the disease gets passed along.
+          Lors de chaque rencontre, le taux de transmission détermine la probabilité que quelqu'un de {infected_singular} transmette la maladie à une personne {susceptible_singular}. Plus le taux de transmission est élevé, plus la probabilité de transmission de la maladie est grande.
         </div>
         <div>
-          In reality, there are many different types of encounters. You might brush past someone on the sidewalk. Or sit next to them on a bus. Perhaps you'll share an ice cream cone. Each of these encounters would result in a different probability of transmitting the infection. But in our model, for simplicity, all encounters share the same transmission rate.
+          Dans la vraie vie, il existe de nombreux types de rencontres différentes. Vous pouvez frôler quelqu'un sur le trottoir. Ou vous asseoir à côté d'eux dans un bus. Peut-être partagerez-vous un cornet de glace. Chacune de ces rencontres entraînerait une probabilité différente de transmettre l'infection. Mais dans notre modèle, par souci de simplicité, toutes les rencontres ont le même taux de transmission.
         </div>
         <div>
           ——
         </div>
         <div>
-          As you continue playing with these simulations (above and below) and thinking about their relevance to coronavirus/COVID-19, here's something to keep in mind:
+          Pendant que vous continuez à jouer avec ces simulations (ci-dessus et ci-dessous) et à réfléchir à leur pertinence pour le coronavirus/COVID-19, gardez ceci à l'esprit :
         </div>
         <div>
-          Transmission rate is partly a function of the <em>disease itself</em> (how naturally infectious it is), but also a function of the <em>environment</em> that the disease lives in. This includes both the physical environment (e.g., air temperature and humidity) as well as the social environment (e.g., people's behaviors).
+          Le taux de transmission dépend en partie de la <em>maladie elle-même</em> (son caractère naturellement contagieux), mais aussi de <em>l'environnement</em> dans lequel évolue la maladie. Cela comprend à la fois l'environnement physique (par exemple, la température et l'humidité de l'air) et l'environnement social (par exemple, le comportement des personnes).
         </div>
         <div>
-          For example, when people wash their hands and wear masks to contain coughs, the transmission rate per encounter goes down — even if the virus itself doesn't change.
+          Par exemple, lorsque les gens se lavent les mains et portent des masques pour contenir leur toux, le taux de transmission par rencontre diminue, même si le virus lui-même ne change pas.
         </div>
         <div>
-          Now, for any viral-growth process, it's possible to find a transmission rate low enough to completely stop the spread. This is called the "critical threshold," and you can learn more about it <a href="https://meltingasphalt.com/interactive/going-critical">here</a>.
+          Pour tout processus de croissance virale, il est possible de trouver un taux de transmission suffisamment bas pour arrêter complètement la propagation. C'est ce qu'on appelle le "seuil critique", et vous pouvez en apprendre davantage à ce sujet <a href="https://meltingasphalt.com/interactive/going-critical">ici (en anglais)</a>.
         </div>
         <div>
-          But COVID-19 is so infectious, it's hard to get below the critical transmission rate. We can only wash our hands so many times a day. Even wearing masks out in public won't be enough enough to bring transmission down far enough (though every inch is helpful).
+          Mais le COVID-19 est tellement contagieux qu'il est difficile de descendre en dessous du seuil critique de contagion. Nous ne pouvons nous laver les mains qu'un certain nombre de fois par jour. Même le port d'un masque en public ne suffira pas à réduire suffisamment la contagion (bien que chaque progrès reste utile).
         </div>
         <div>
-          We <em>could</em> all wear hazmat suits every time we leave the house; technically that would solve the transmission problem (without changing our patterns of social interaction). But since that's, uh, impractical, let's consider other ways to keep this disease from consuming us.
+          Nous <em>pourrions</em> tous porter des combinaisons de protection contre les substances dangereuses chaque fois que nous quittons la maison ; techniquement, cela résoudrait le problème de la contagion (sans changer nos schémas d'interaction sociale). Mais puisque c'est peu pratique, envisageons d'autres moyens d'empêcher cette maladie de nous dévorer.
         </div>
         <div>
-          <h3>Travel</h3>
+          <h3>Déplacements</h3>
         </div>
         <div>
-          Here's another unrealistic assumption we've been making: we've been allowing people to interact only with their immediate neighbors.
+          Nous avons fait une autre hypothèse irréaliste : nous n'avons permis aux gens de n'interagir qu'avec leurs voisines et voisins immédiates.
         </div>
         <div>
-          What happens when we let people travel farther afield? (We're still assuming 4 encounters per day, a parameter we'll expose in the next section.)
+          Que se passe-t-il lorsque nous laissons les gens se déplacer plus loin (nous supposons toujours 4 rencontres par jour, un paramètre que nous discuterons dans la prochaine section) ?
         </div>
         <div>
-          As you pull the <strong>travel radius</strong> slider below, you'll see a sample of the encounters that the center person will have on any given day. (We can't draw <em>everyone's</em> encounters because it would get too crowded. You'll just have to use your imagination.) Note that in our model, unlike in real life, each day brings a new (random) set of encounters.
+          En abaissant le curseur du <strong>rayon de déplacement</strong> ci-dessous, vous verrez un échantillon des rencontres que la personne du centre aura faite en une journée (nous ne pouvons pas dessiner les rencontres de <em>tout le monde</em> parce que ce serait illisible. Il faudra plutôt faire appel à votre imagination). Notez que dans notre modèle, contrairement à la vie réelle, chaque jour apporte une nouvelle série (aléatoire) de rencontres.
         </div>
         <Figure>
           <Grid degree={24}
@@ -335,40 +341,40 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Note that if you restrict travel from the beginning (e.g., to a radius of 2 units), you can slow the infection down a great deal.
+          Notez que si vous limitez les déplacements dès le début (par exemple, à un rayon de 2 unités), vous pouvez ralentir considérablement la contagion.
         </div>
         <div>
-          But what happens when you start with unrestricted travel, let the infection spread pretty much everywhere, and only restrict travel <em>later</em>?
+          Mais que se passe-t-il lorsque vous commencez avec des déplacements libres, que vous laissez l'infection se répandre à peu près partout et que vous ne faites que restreindre les déplacements <em>plus tard</em> ?
         </div>
         <div>
-          In other words, how early in the infection curve do you have to curtail travel in order for it to meaningful slow the outbreak?
+          En d'autres termes, à quel stade de la courbe de contagion faut-il réduire les déplacements pour qu'ils puissent ralentir l'épidémie de manière significative ?
         </div>
         <div>
-          Go ahead, try it. Start with a travel radius of 25. Then play the simulation, pausing when you get to about 10 percent infected. Then reduce the travel radius to 2 and play it out. What happens?
+          Allez-y, essayez. Commencez par un rayon de 25. Puis jouez la simulation, en faisant une pause lorsque vous atteignez environ 10 % de contagion. Réduisez ensuite le rayon de déplacement à 2 et reprenez. Que se passe-t-il ?
         </div>
         <div>
-          Takeaway: travel restrictions are most useful when they're applied early, at least for the purpose of flattening the curve. (So let's get them in place!)
+          Vous l'aurez compris : les restrictions dans les déplacement ne sont utiles que lorsqu'elles sont appliquées tôt, au moins dans le but d'aplatir la courbe.
         </div>
         <div>
-          But travel restrictions can help even in the later stages of an outbreak, for at least two reasons:
+          Mais les restrictions de déplacement peuvent être utiles, même aux derniers stades d'une épidémie, pour au moins deux raisons :
         </div>
         <div>
           <ol>
-            <li>Buses, trains, and airports are places where people gather together in cramped quarters. When people stop using these modes of transport, they reduce the number of encounters they have with potentially infected people. (We'll explore this more below.)</li>
-            <li>Reducing travel is critical <em>in concert with regional containment measures</em>. If one region gets the outbreak under control, but neighboring regions are still on fire, you have to protect the controlled region. (We're not going to explore containment measures in this article, but they may be important soon, and if you're interested, you might start <a href="https://necsi.edu/beyond-contact-tracing">here</a>.)</li>
+            <li>Les bus, les trains et les aéroports sont des lieux où les gens se rassemblent dans des endroits exigus. Lorsque les gens cessent d'utiliser ces modes de transport, ils réduisent le nombre de rencontres avec des personnes potentiellement contaminées (nous y reviendrons plus loin).</li>
+            <li>Il est essentiel de réduire les déplacements <em>conjointement avec des mesures de confinement régionales</em>. Si une région maîtrise l'épidémie, mais que les régions voisines sont toujours sous tension, vous devez protéger la région maitrisée (nous n'allons pas explorer les mesures de confinement dans cet article. Vous pouvez en savoir plus <a href="https://necsi.edu/beyond-contact-tracing">ici (en anglais)</a>).</li>
           </ol>
         </div>
         <div>
-          <h3>Number of encounters</h3>
+          <h3>Rencontres</h3>
         </div>
         <div>
-          Alright, let's really open this thing up.
+          Très bien, commençons à vraiment creuser le sujet.
         </div>
         <div>
-          In the simulation below, you can vary the <strong>encounters per day</strong>.
+          Dans la simulation ci-dessous, vous pouvez faire varier le nombre de <forts>rencontres par jour</forts>.
         </div>
         <div>
-          Let's start at 20. What's the minimum value we need to keep the outbreak contained?
+          Commençons à 20. Quelle est la valeur minimale dont nous avons besoin pour contenir l'épidémie ?
         </div>
         <Figure>
           <Grid degree={24}
@@ -392,37 +398,37 @@ class App extends Component<Props, State> {
         {/*  Here's another question you might try to answer: <em>For a fixed number of encounters (e.g., 5 per day), how much do you need to reduce the travel radius to keep the disease in check?</em>*/}
         {/*</div>*/}
         <div>
-          As you can see, reducing encounters per day has a <em>dramatic effect</em> on the outbreak. It easily flattens the curve, and even has the potential (when taken very seriously) to completely quench an outbreak.
+          Comme vous pouvez le voir, la réduction du nombre de rencontres par jour a un <em>effet dramatique</em> sur l'épidémie. Elle aplatit facilement la courbe, et a même le potentiel (lorsqu'elle est prise très au sérieux) d'éteindre complètement une épidémie.
         </div>
         <div>
-          This is the effect we're hoping for when we call for "social distance." This is why so many people are pleading with their officials to stop the parades and close the schools, and why all of us should stay away from bars and coffee shops and restaurants, and work from home as much as possible.
+          C'est l'effet que nous espérons obtenir en parlant de "distance sociale". C'est pourquoi tant de personnes implorent leurs responsables politique d'arrêter les manifestations et de fermer les écoles, et pourquoi nous devrions tous nous tenir à l'écart des bars, des cafés et des restaurants, et travailler le plus possible à domicile.
         </div>
         <div>
-          The NBA did their fans a tremendous service by canceling the rest of the season. Now we need to follow suit and <em>cancel everything</em>.
+          La NBA a rendu un immense service à ses fans en annulant le reste de la saison. Maintenant, nous devons faire de même et <em>annuler tout </em>.
         </div>
         <div>
-          In my understanding (again, not an expert), this is the single most important lever we have for fighting this thing.
+          D'après ce que je comprends (encore une fois, je ne suis pas un expert), c'est le levier le plus important dont nous disposons pour lutter contre ce truc.
         </div>
         <div>
-          <h3>Death</h3>
+          <h3>Morts</h3>
         </div>
         <div>
-          Not every patient recovers from a disease. Many end up {dead}.
+          Tous les patients ne guérissent pas d'une maladie. Beaucoup finissent par mourir.
         </div>
         <div>
-          Enter the <strong>fatality rate</strong>.
+          Introduisons donc le <strong>taux de mortalité</strong>.
         </div>
         <div>
-          In our simulation, fatality rate is the probability that a patient who gets infected will ultimately die of the infection, assuming they get normal/adequate medical care.
+          Dans notre simulation, le taux de mortalité est la probabilité qu'un patient contaminé meure finalement de la maladie, en supposant qu'il reçoive des soins médicaux normaux&#8239;/&#8239;adéquats.
         </div>
         <div>
-          <span className="deemphasized">(Update: an earlier version of this article made a distinction between case fatality rate and mortality rate, but failed to define the terms correctly. Collapsing this distinction and using the term "fatality rate" instead.)</span>
+          <span className="deemphasized">(mise à jour : une version antérieure de cet article établissait une distinction entre le taux de létalité et le taux de mortalité, mais ne définissait pas correctement ces termes. Pour éviter toute ambiguité, supprimons cette distinction et n’utilisons que le terme « taux de mortalité »)</span>
         </div>
         <div>
-          The fatality rate for COVID-19 has been estimated between 1 percent and <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 percent</a>. It might turn out to be lower than 1 percent, if there are a lot of undiagnosed cases. It's definitely higher when the medical system is overburdened (more on that in a minute).
+          Le taux de mortalité du COVID-19 a été estimé entre 1 % et<a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 % (en anglais)</a>. Il pourrait s'avérer inférieur à 1 %, s'il y a beaucoup de cas non diagnostiqués. Il est nettement plus élevé lorsque le système médical est surchargé (plus d'informations à ce sujet dans une minute).
         </div>
         <div>
-          We'll start at a 3 percent fatality rate for our disease model, but you can vary the parameter below:
+          Dans notre modélisation de la maladie, partons d'un taux de mortalité de 3 % (vous pouvez faire varier le paramètre ci-dessous) :
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -441,37 +447,37 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          Those scattered black dots may not look like much. But remember, each is a human life lost to the disease.
+          Ces points noirs isolés, ça a peut-être l’air de rien. Mais n'oubliez pas que chacun d'entre eux est une vie humaine perdue à cause de la maladie.
         </div>
         <div>
-          <h3>Hospital capacity</h3>
+          <h3>Capacité des hôpitaux</h3>
         </div>
         <div>
-          Below you'll find one last new slider. It controls <strong>hospital capacity</strong>.
+          Nous allons introduire ci-dessous un nouveau curseur. Il contrôle la <strong>capacité des hôpitaux</strong>.
         </div>
         <div>
-          This is the number of patients (expressed as a percentage of the population) that can be treated by our medical system at any one time.
+          Il s'agit du nombre de patients (exprimé en pourcentage de la population) qui peuvent être traités par notre système médical à tout moment.
         </div>
         <div>
-          Why does hospital capacity matter?
+          Pourquoi la capacité des hôpitaux est-elle importante ?
         </div>
         <div>
-          When there are more patients than the system can handle, they can’t get the treatment they need. And as a result, they have significantly worse outcomes. As we've seen in Italy, some may be left to die in the hallways.
+          Lorsque le nombre de patients dépasse les capacités du système, ils ne peuvent pas recevoir le traitement dont ils ont besoin. Et par conséquent, ils souffrent de complications beaucoup plus graves. Comme nous l'avons vu en Italie, certains peuvent être laissés pour mort dans les couloirs.
         </div>
         <div>
-          I've heard people speak of hospital capacity as the “number of beds,” or “number of ICU beds.” My take is that mere "beds" can be set up in a gymnasium on very short notice. I think the real bottleneck is medical equipment — specifically ventilators. But I'm not sure. Maybe it’s medical personnel.
+          J'ai entendu des gens parler de la capacité des hôpitaux en termes de « nombre de lits » ou de « nombre de lits en soins intensifs ». Je pense que de simples « lits » peuvent être installés dans un gymnase en très peu de temps. Je pense que le véritable goulot d'étranglement est l'équipement médical (en particulier les ventilateurs). Mais je n'en suis pas sûr. C'est peut-être le personnel médical.
         </div>
         <div>
-          In reality, this matters <em>a lot</em>. We need to identify what the bottleneck is, and do our best to alleviate pressure there. But for a simulation, we can just wave our hands and assume there's limited capacity somewhere in the system. Remember, we're not trying to model reality too carefully.
+          Concrètement, cela compte <em>énormément</em>. Nous devons identifier le goulot d'étranglement et faire de notre mieux pour alléger la pression qui s'y exerce. Mais pour une simulation, nous pouvons nous contenter d'en faire abstraction en supposant qu'il y a une capacité limitée quelque part dans le système. N'oubliez pas que nous n'essayons pas de modéliser la réalité avec trop de précision.
         </div>
         <div>
-          In our disease model, here's how the medical system breaks:
+          Dans notre modélisation de la maladie, voici comment le système médical fait défaut :
         </div>
         <div>
-          <strong>When there are more infections than hospital capacity, the fatality rate <em>doubles</em>.</strong>
+          <strong>Lorsqu'il y a plus de contaminations que la capacité de l'hôpital, le taux de mortalité <em>double</em>.</strong>
         </div>
         <div>
-          Give it a try. Pay special attention to the <em>input fatality rate</em> (the value on the slider), which defines how often people die even in the best circumstances, vs. the <em>actual death rate</em> (highlighted below the chart), which tells us how the system behaves under strain.
+          Essayons. Portez une attention particulière au <em>taux de mortalité à l'entrée</em> (la valeur sur le curseur), qui définit la fréquence des décès, même dans les meilleures circonstances, par rapport au <em>taux de mortalité réel</em> (mis en évidence sous le graphique), qui nous indique comment le système se comporte sous tension.
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -494,22 +500,22 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          <h3>"Flatten the curve"</h3>
+          <h3>"Aplatir la courbe"</h3>
         </div>
         <div>
-          You've heard this before. You know why it's important. But now you're about to get a feel for it.
+          Vous en avez déjà entendu parlé. Vous savez pourquoi c'est important. Mais maintenant, vous êtes sur le point de le percevoir.
         </div>
         <div>
-          This is your final test today.
+          C'est votre dernier test de la journée.
         </div>
         <div>
-          The input fatality rate is fixed at 3 percent. Hospital capacity is fixed at 5 percent.
+          Le taux de mortalité à l'entrée est fixé à 3 %. La capacité des hôpitaux est fixée à 5 %.
         </div>
         <div>
-          Play out the simulation and note the actual death rate: 6 percent. Then try to bring that number down.
+          Jouez la simulation et notez le taux de mortalité réel : 6 %. Essayez ensuite de faire baisser ce chiffre.
         </div>
         <div>
-          In other words, flatten the curve:
+          En d'autres termes, aplatissez la courbe :
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -532,25 +538,25 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          However this worked out for you in simulation, reality is going to be <em>so much harder</em>. Real people don't respond like sliders in a UI.
+          Quelle que soit la manière dont cela a fonctionné pour vous en simulation, la réalité va être <em>beaucoup plus difficile</em>. Les personnes réelles ne réagissent pas comme les curseurs d'une interface.
         </div>
         <div>
-          And here's the kicker: even if we manage to "flatten the curve" enough to meaningfully space out the case load, we're still positioned to lose millions and millions of lives.
+          Et le pire c'est que même si nous parvenons à "aplatir la courbe" suffisamment pour espacer significativement la charge de travail, nous sommes toujours en position de perdre des millions et des millions de vies.
         </div>
         <div>
-          Maybe we won't lose as many as a worst-case scenario; maybe we won't lose them in hospital hallways. But as long as the virus continues to spread — which it shows every sign of doing — there's an unthinkable amount of suffering in our future.
+          Peut-être que nous n'en perdrons pas autant que dans le pire des cas ; peut-être que nous ne les perdrons pas dans les couloirs de l'hôpital. Mais tant que le virus continuera à se propager (ce qui semble être le cas) il y aura une quantité impensable de souffrance dans notre avenir.
         </div>
         <div>
-          Unless we do the right things today.
+          À moins que nous ne prenions les bonnes mesures dès aujourd'hui.
         </div>
         <div>
-          Stop traveling. Stop going out. Stop visiting your parents and your friends. Stop eating at restaurants. Pause everything you possibly can. If you're in charge of things, <em>cancel them</em>. Lock. It. All. Down.
+          Arrêtez de vous déplacer. Arrêtez de sortir. Arrêtez de rendre visite à vos parents et à vos amis. Arrête de manger au restaurant. Arrête tout ce que vous pouvez. Si tu vous êtes en responsabilité de quelque chose, <em>annulez tout</em>. Verrouillez. Tout. Maintenant.
         </div>
         <div>
-          Please: take decisive action now.
+          Je vous en prie : prenez des mesures décisives dès maintenant.
         </div>
         <div>
-          COVID-19 is coming for us, and it won't be stopped by half-measures.
+          Le COVID-19 vient nous chercher, et il ne sera pas arrêté par des demi-mesures.
         </div>
 
 
@@ -575,42 +581,42 @@ class App extends Component<Props, State> {
           <b>License</b>
         </div>
         <div>
-          <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — no rights reserved. You're free to use this work however you see fit, including copying it, modifying it, and distributing it on your own site.
+          <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — aucun droit réservé. Vous êtes libre d'utiliser cette œuvre comme bon vous semble, y compris en la copiant, en la modifiant et en la distribuant sur votre propre site.
         </div>
         <div>
-          <a href="https://github.com/kevinsimler/outbreak">Source code</a>
+          <a href="https://github.com/kevinsimler/outbreak">Code source original</a> · <a href="https://github.com/borisschapira/outbreak">Code source de la version française</a>
         </div>
         <div>
-          <b>Full model</b>
+          <b>Modélisation complète</b>
         </div>
         <div>
-          The full model, with all sliders exposed, can be found at the very bottom of the page.
+          Le modèle complet, avec tous les curseurs visibles, se trouve tout en bas de la page.
         </div>
         <div>
-          <b>Acknowledgments</b>
+          <b>Remerciements</b>
         </div>
         <div>
-          I'd like to thank <a href="https://twitter.com/nsbarr">Nick Barr</a>, <a href="https://twitter.com/origiful">Ian Padgham</a>, <a href="https://twitter.com/frooblor">Diana Huang</a>, Kellie Jack, <a href="https://twitter.com/btnaughton">Brian Naughton</a>, <a href="https://twitter.com/yaneerbaryam">Yaneer Bar-Yam</a>, and <a href="https://twitter.com/adamdangelo">Adam D'Angelo</a> for helpful feedback and encouragement.
+          Je voudrais remercier <a href="https://twitter.com/nsbarr">Nick Barr</a>, <a href="https://twitter.com/origiful">Ian Padgham</a>, <a href="https://twitter.com/frooblor">Diana Huang</a>, Kellie Jack, <a href="https://twitter.com/btnaughton">Brian Naughton</a>, <a href="https://twitter.com/yaneerbaryam">Yaneer Bar-Yam</a>, et <a href="https://twitter.com/adamdangelo">Adam D'Angelo</a> pour leurs commentaires et leurs encouragements bienvenus.
         </div>
         <div>
-          <b>Further reading</b>
+          <b>Pour en savoir plus</b>
         </div>
         <div>
           <ul>
-            <li><a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca">Coronavirus: Why You Must Act Now</a> — Tomas Pueyo explains why we've been systematically underestimating this thing, and why that needs to change. Just read it.</li>
-            <li><a href="https://medium.com/@joschabach/flattening-the-curve-is-a-deadly-delusion-eea324fe9727">Don’t "Flatten the Curve," Stop It!</a> — Joscha Bach does some calculations on hospital capacity and concludes that "flattening the curve" won't be enough; we have to completely stop the outbreak.</li>
-            <li>The Washington Post's <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">excellent simulation</a> — brilliant use of billiard balls to show transmission and social distancing.</li>
-            <li><a href="https://meltingasphalt.com/interactive/going-critical/">Going Critical</a> — my previous exploration of diffusion and viral growth processes, including the nuclear reactions and the growth of knowledge.</li>
+            <li><a href="https://medium.com/tomas-pueyo/coronavirus-agissez-aujourdhui-2bd1dc7838f6">Coronavirus : Agissez Aujourd’hui</a> — Tomas Pueyo explique pourquoi nous avons systématiquement sous-estimé ce phénomène et pourquoi il faut que cela change. Lisez-le.</li>
+            <li><a href="https://medium.com/@joschabach/flattening-the-curve-is-a-deadly-delusion-eea324fe9727">Don’t "Flatten the Curve," Stop It! (en anglais)</a> — Joscha Bach fait quelques calculs sur la capacité des hôpitaux et conclut « qu'aplatir la courbe » ne sera pas suffisant ; nous devons arrêter complètement l'épidémie.</li>
+            <li><a href="https://www.washingtonpost.com/graphics/2020/health/corona-simulator-french/">L'excellente simulation</a> du Washington Post — une utilisation brillante des boules de billard pour montrer la contagion et la distanciation sociale.</li>
+            <li><a href="https://meltingasphalt.com/interactive/going-critical/">Going Critical (en anglais)</a> — ma précédente réflexion sur les processus de diffusion et de croissance virale, y compris les réactions nucléaires et la croissance de la connaissance.</li>
           </ul>
         </div>
 
         {this.renderEndOfPostDivider(true)}
 
         <div className="subscription-footer">
-          <a href="https://meltingasphalt.com"><strong>Melting Asphalt</strong></a> is maintained by <span className="nohyphen">Kevin</span> <span className="nohyphen">Simler</span>.<br/><br/> I publish <em>very infrequently</em>, so you might want to get notified about new posts:<br/>
+          <a href="https://meltingasphalt.com"><strong>Melting Asphalt</strong></a> (dont est issue cette traduction) est maintenu par <span className="nohyphen">Kevin</span> <span className="nohyphen">Simler</span>.<br/>Il ne publie que <em>très rarement</em>, donc vous pourriez vouloir être notifié·e des futures publications<br/>
           {this.renderSubscribeForm()}
           {/*<div style={{textAlign: 'center', fontSize: '10pt', color: '#666', marginTop: '0.5em'}}>(This is a <em>very low frequency</em> mailing list. Pinky swear.)</div>*/}
-          <br/>You can also <a href="https://twitter.com/KevinSimler"><strong>find me on Twitter</strong></a>.
+          <br/>Vous pouvez aussi le <a href="https://twitter.com/KevinSimler"><strong>retrouver sur Twitter</strong></a>.
           <div>&nbsp;</div>
         </div>
 
@@ -622,19 +628,19 @@ class App extends Component<Props, State> {
         </div>
         <div>
           <a name="self-quarantine"/>
-          <h3>Self-quarantine</h3>
+          <h3>Quarantaine volontaire</h3>
         </div>
         <div>
-          (Thanks to <a href="https://twitter.com/jasonlegate">Jason Legate</a> for suggesting and coding this addition to the disease model.)
+          (Merci <a href="https://twitter.com/jasonlegate">Jason Legate</a> pour avoir suggéré et codé cet ajout au modèle de la maladie.)
         </div>
         <div>
-          In the simulation below, you can vary the <strong>self-quarantine rate</strong>, i.e., the chance that a patient will choose to isolate themselves once they become symptomatic. Patients who become {selfQuarantined} will be drawn in blue instead of red.
+          Dans la simulation ci-dessous, vous pouvez faire varier le <strong></strong>taux de quarantaine volontaire<strong></strong>, c'est-à-dire la probabilité qu'un patient choisisse de s'isoler une fois qu'il devient symptomatique. Un patient qui {selfQuarantined} sera dessiné en bleu au lieu de rouge.
         </div>
         <div>
-          Additionally, you can vary how strict they are with the <strong>self-quarantine strictness</strong> parameters. At 100 percent strictness, patients who are isolating themselves have 0 encounters with other people. At 0 percent strictness, they have their normal number of encounters. And it varies linearly in between.
+          En outre, vous pouvez faire varier leur degré de rigueur à l'aide des paramètres <strong>rigueur de la quarantaine volontaire</strong>. À 100 % de rigueur, les patients qui s'isolent n'ont aucune rencontre avec d'autres personnes. À 0 % de rigueur, ils ont leur nombre normal de rencontres. Et ça varie linéairement entre les deux.
         </div>
         <div>
-          Let's start the self-quarantine rate at 25 percent and the strictness also at 25 percent. What does it take to keep the outbreak contained?
+          Commençons par le taux de quarantaine volontaire à 25 % et une rigueur également à 25 %. Quelles mesures faut-il prendre pour contenir l'épidémie ?
         </div>
         <Figure>
           <Grid degree={24}
@@ -657,13 +663,13 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-          As you can see, if people voluntarily self-quarantine (once they show symptoms) and are strict about isolating themselves, the spread can be mitigated. Unfortunately, because patients are contagious during the incubation period (before they have a chance to notice their own symptoms), it's hard to stop the spread entirely.
+          Comme vous pouvez le voir, si les gens se mettent volontairement en quarantaine (une fois qu'ils présentent des symptômes) et s'ils sont stricts quant à leur isolement, la propagation peut être atténuée. Malheureusement, comme les patients sont contagieux pendant la période d'incubation (avant qu'ils n'aient la possibilité de remarquer leurs propres symptômes), il est difficile d'arrêter complètement la propagation.
         </div>
         <div>
-          For most diseases, self-quarantine won't solve the problem on its own. Rather, it's one tool among many (including better hygiene, social distances, travel restrictions, etc.) that <em>all together</em> can bring an outbreak under control. A big lesson here is that every strategy complements every other strategy.
+          Pour la plupart des maladies, la quarantaine volontaire ne résoudra pas le problème à elle seule. C'est plutôt un outil parmi d'autres (notamment une meilleure hygiène, des distances sociales, des restrictions de déplacement, etc.) qui <em>tous ensemble</em> peuvent permettre de maîtriser une épidémie. La grande leçon à retenir est que chaque stratégie est complémentaire de toutes les autres.
         </div>
         <div>
-          <h3>Full model</h3>
+          <h3>Modélisation complète</h3>
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -692,8 +698,8 @@ class App extends Component<Props, State> {
 
   renderSubscribeForm() {
     return (
-      <form method="post" action="https://meltingasphalt.us8.list-manage.com/subscribe/post?u=0bc9d741e167733d20c520ea6&amp;id=57ebd9b4a6" id="mc4wp-form-1" className="form mc4wp-form"><input type="email" id="mc4wp_email" name="EMAIL" placeholder="Enter your email" required />
-        <input type="submit" value="Subscribe" />
+      <form method="post" action="https://meltingasphalt.us8.list-manage.com/subscribe/post?u=0bc9d741e167733d20c520ea6&amp;id=57ebd9b4a6" id="mc4wp-form-1" className="form mc4wp-form"><input type="email" id="mc4wp_email" name="EMAIL" placeholder="Votre email" required />
+        <input type="submit" value="Vous abonner" />
         <textarea name="_mc4wp_required_but_not_really" style={{display: "none"}}/><input type="hidden" name="_mc4wp_form_submit" value="1" /><input type="hidden" name="_mc4wp_form_instance" value="1" /><input type="hidden" name="_mc4wp_form_nonce" value="8a45344b67" />
       </form>
     )
