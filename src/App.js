@@ -89,7 +89,7 @@ class App extends Component<Props, State> {
           <span>AVERTISSEMENT #2</span>: Je ne suis pas un épidémiologiste ! Je m’en remets aux experts en maladies infectieuses (et vous devriez en faire autant). J’ai presque certainement fait des erreurs dans cet article, mais je les corrigerai aussi vite que possible. Si vous constatez des problèmes, merci de <a href="https://meltingasphalt.com/contact/">me contacter (formulaire en anglais)</a>.
         </div>
         <div>
-          Compris ?
+          Vous êtes prêts ?
         </div>
         <div>
           Alors c’est parti.
