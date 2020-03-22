@@ -428,7 +428,7 @@ class App extends Component<Props, State> {
           <span className="deemphasized">(mise à jour : une version antérieure de cet article établissait une distinction entre le taux de létalité et le taux de mortalité, mais ne définissait pas correctement ces termes. Pour éviter toute ambiguité, supprimons cette distinction et n’utilisons que le terme « taux de mortalité »)</span>
         </div>
         <div>
-          Le taux de mortalité du COVID-19 a été estimé entre 1 % et<a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 % (en anglais)</a>. Il pourrait s’avérer inférieur à 1 %, s’il y a beaucoup de cas non diagnostiqués. Il est nettement plus élevé lorsque le système médical est surchargé (plus d’informations à ce sujet dans une minute).
+          Le taux de mortalité du COVID-19 a été estimé entre 1 % et <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 % (en anglais)</a>. Il pourrait s’avérer inférieur à 1 %, s’il y a beaucoup de cas non diagnostiqués. Il est nettement plus élevé lorsque le système médical est surchargé (plus d’informations à ce sujet dans une minute).
         </div>
         <div>
           Dans notre modélisation de la maladie, partons d’un taux de mortalité de 3 % (vous pouvez faire varier le paramètre ci-dessous) :
