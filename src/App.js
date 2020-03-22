@@ -89,6 +89,9 @@ class App extends Component<Props, State> {
           <span>AVERTISSEMENT #2</span>: Je ne suis pas un épidémiologiste ! Je m’en remets aux experts en maladies infectieuses (et vous devriez en faire autant). J’ai presque certainement fait des erreurs dans cet article, mais je les corrigerai aussi vite que possible. Si vous constatez des problèmes, merci de <a href="https://meltingasphalt.com/contact/">me contacter (formulaire en anglais)</a>.
         </div>
         <div>
+          Si vous voyez des erreurs de traduction en français, ou souhaitez suggérer des améliorations, n’hésitez pas à contacter <a href="https://twitter.com/borisschapira">Boris</a>.
+        </div>
+        <div>
           Vous êtes prêts ?
         </div>
         <div>
@@ -584,7 +587,7 @@ class App extends Component<Props, State> {
           <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — aucun droit réservé. Vous êtes libre d’utiliser cette œuvre comme bon vous semble, y compris en la copiant, en la modifiant et en la distribuant sur votre propre site.
         </div>
         <div>
-          <a href="https://github.com/kevinsimler/outbreak">Code source original</a> · <a href="https://github.com/borisschapira/outbreak">Code source de la version française</a>
+          <a href="https://github.com/kevinsimler/outbreak">Code source original</a> · <a href="https://github.com/borisschapira/epidemie">Code source de la version française</a>
         </div>
         <div>
           <b>Modélisation complète</b>
