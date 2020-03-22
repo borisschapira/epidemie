@@ -101,7 +101,7 @@ class App extends Component<Props, State> {
         Nous allons construire notre modèle lentement, brique après brique.
         </div>
         <div>
-          La première chose dont une maladie a besoin est une <strong>population</strong>, c’est-à-dire, l’ensemble des personnes qui peuvent potentiellement attraper la maladie. Les nôtres vivront dans des rangées et des colonnes bien ordonnées, comme la grille 9x9 que vous voyez ici :
+          La première chose dont une maladie a besoin est une <strong>population</strong>, c’est-à-dire, l’ensemble des personnes qui peuvent potentiellement attraper la maladie. Les nôtres vivront dans des rangées et des colonnes bien ordonnées, comme la grille 9 × 9 que vous voyez ici :
         </div>
         <Figure>
           <Grid daysIncubating={0}
@@ -177,7 +177,7 @@ class App extends Component<Props, State> {
         </div>
         <div>
           <ul>
-            <li><NodeLegend type="susceptible"/> &nbsp;<b>Susceptible</b></li>
+            <li><NodeLegend type="susceptible"/> &nbsp;<b>Susceptibles</b></li>
             <li><NodeLegend type="infected"/> &nbsp;<b>Contaminés</b></li>
             <li><NodeLegend type="removed"/> &nbsp;<b>Rétablis</b></li>
           </ul>
@@ -273,7 +273,7 @@ class App extends Component<Props, State> {
           {showSpoilerButton}
         </div>
         <div>
-          Dans mes expériences, il semble se situer autour de <span className={spoilerOrNot}>0,35</span>, peut-être <span className={spoilerOrNot}>0,34</span>. En dessous de ça, j’ai vu la contamination s’interrompte à chaque fois. Au-dessus, elle infecte généralement la majeure partie de la grille.
+          Dans mes expériences, il semble se situer autour de <span className={spoilerOrNot}>0,35</span>, peut-être <span className={spoilerOrNot}>0,34</span>. En dessous de ça, j’ai vu la contamination s’estomper à chaque fois. Au-dessus, elle infecte généralement la majeure partie de la grille.
         </div>
         <div>
           Voici comment la contamination fonctionne dans notre modélisation de la maladie.
@@ -353,7 +353,7 @@ class App extends Component<Props, State> {
           Allez-y, essayez. Commencez par un rayon de 25. Puis jouez la simulation, en faisant une pause lorsque vous atteignez environ 10 % de contagion. Réduisez ensuite le rayon de déplacement à 2 et reprenez. Que se passe-t-il ?
         </div>
         <div>
-          Vous l’aurez compris : les restrictions dans les déplacement ne sont utiles que lorsqu’elles sont appliquées tôt, au moins dans le but d’aplatir la courbe.
+          Vous l’aurez compris : les restrictions dans les déplacements ne sont utiles que lorsqu’elles sont appliquées tôt, au moins dans le but d’aplatir la courbe.
         </div>
         <div>
           Mais les restrictions de déplacement peuvent être utiles, même aux derniers stades d’une épidémie, pour au moins deux raisons :
@@ -404,7 +404,7 @@ class App extends Component<Props, State> {
           C’est l’effet que nous espérons obtenir en parlant de « distance sociale ». C’est pourquoi tant de personnes implorent leurs responsables politique d’arrêter les manifestations et de fermer les écoles, et pourquoi nous devrions tous nous tenir à l’écart des bars, des cafés et des restaurants, et travailler le plus possible à domicile.
         </div>
         <div>
-          La NBA a rendu un immense service à ses fans en annulant le reste de la saison. Maintenant, nous devons faire de même et <em>annuler tout </em>.
+          La NBA a rendu un immense service à ses fans en annulant le reste de la saison. Maintenant, nous devons faire de même et <em>annuler tout</em>.
         </div>
         <div>
           D’après ce que je comprends (encore une fois, je ne suis pas un expert), c’est le levier le plus important dont nous disposons pour lutter contre ce truc.
@@ -503,7 +503,7 @@ class App extends Component<Props, State> {
           <h3>« Aplatir la courbe »</h3>
         </div>
         <div>
-          Vous en avez déjà entendu parlé. Vous savez pourquoi c’est important. Mais maintenant, vous êtes sur le point de le percevoir.
+          Vous en avez déjà entendu parler. Vous savez pourquoi c’est important. Mais maintenant, vous êtes sur le point de le percevoir.
         </div>
         <div>
           C’est votre dernier test de la journée.
@@ -550,7 +550,7 @@ class App extends Component<Props, State> {
           À moins que nous ne prenions les bonnes mesures dès aujourd’hui.
         </div>
         <div>
-          Arrêtez de vous déplacer. Arrêtez de sortir. Arrêtez de rendre visite à vos parents et à vos amis. Arrête de manger au restaurant. Arrête tout ce que vous pouvez. Si tu vous êtes en responsabilité de quelque chose, <em>annulez tout</em>. Verrouillez. Tout. Maintenant.
+          Arrêtez de vous déplacer. Arrêtez de sortir. Arrêtez de rendre visite à vos parents et à vos amis. Arrête de manger au restaurant. Arrête tout ce que vous pouvez. Si vous êtes en responsabilité de quelque chose, <em>annulez tout</em>. Verrouillez. Tout. Maintenant.
         </div>
         <div>
           Je vous en prie : prenez des mesures décisives dès maintenant.
@@ -578,7 +578,7 @@ class App extends Component<Props, State> {
         {/*  Thanks for reading. If this has been helpful, I hope you'll consider sharing.*/}
         {/*</div>*/}
         <div>
-          <b>License</b>
+          <b>Licence</b>
         </div>
         <div>
           <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — aucun droit réservé. Vous êtes libre d’utiliser cette œuvre comme bon vous semble, y compris en la copiant, en la modifiant et en la distribuant sur votre propre site.
@@ -709,7 +709,7 @@ class App extends Component<Props, State> {
     let timestamp = "";
     let divider = <span>——</span>;
     if (showTimestamp) {
-      timestamp = "Originally published March 16, 2020.";
+      timestamp = "Publié initialement le 16 mars 2020.";
       divider = <img src="https://meltingasphalt.com/wp-content/themes/responsive/core/images/flourish.svg" width={50} alt="——" />;
     }
 

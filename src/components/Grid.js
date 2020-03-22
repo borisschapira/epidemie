@@ -869,7 +869,7 @@ export default class Grid extends Component<Props, State> {
     let daysIncubatingSlider = null;
     if (showAll || this.props.showDaysPerStateControls) {
       daysIncubatingSlider =
-          this.renderSlider("Jours d'incubation", this.state.daysIncubating,
+          this.renderSlider("Jours d’incubation", this.state.daysIncubating,
               (e, value) => { this.setState({daysIncubating: value}); },
               0, 20, 1, false, false);
     }
@@ -902,7 +902,7 @@ export default class Grid extends Component<Props, State> {
     if (showAll || this.props.showDeathRateSlider) {
       let sliderName = "Taux de mortalité";
       if (this.state.hospitalCapacityPct > -1) {
-        sliderName = "Taux de mortalité à l'entrée";
+        sliderName = "Taux de mortalité à l’entrée";
       }
 
       deathRateSlider =
