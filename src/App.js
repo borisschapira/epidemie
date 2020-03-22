@@ -53,7 +53,7 @@ class App extends Component<Props, State> {
           <h5 className="author">par Kevin Simler<br/>16 mars 2020<br/><small>(traduction de Boris Schapira)</small></h5>
         </div>
         <div>
-          <span className="deemphasized">Original : <a href="https://meltingasphalt.com/outbreak/">English</a></span>
+          <span className="deemphasized">Article d’origine : <a href="https://meltingasphalt.com/outbreak/">English</a></span>
         </div>
         <div>
           <span className="deemphasized">Autre traductions : <a href="https://www.podemosaprender.org/brote/">español</a>, <a href="https://thecode.media/epidemic/">Русский язык</a></span>
