@@ -2,7 +2,7 @@
   "name": "iblog_outbreak",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www.meltingasphalt.com.com/interactive/outbreak",
+  "homepage": "https://epidemie.netlify.com/",
   "dependencies": {
     "@material-ui/core": "^3.5.1",
     "@material-ui/lab": "^3.0.0-alpha.23",
