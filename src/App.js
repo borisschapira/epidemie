@@ -56,7 +56,7 @@ class App extends Component<Props, State> {
           <span className="deemphasized">Article d’origine : <a href="https://www.meltingasphalt.com/interactive/outbreak/">English</a></span>
         </div>
         <div>
-          <span className="deemphasized">Autre traductions : <a href="https://www.podemosaprender.org/brote/">español</a>, <a href="https://thecode.media/epidemic/">Русский язык</a></span>
+          <span className="deemphasized">Autre traductions : <a href="https://www.podemosaprender.org/brote/">español</a>, <a href="https://thecode.media/epidemic/">Русский язык</a>, <a href="https://meltingasphalt.com/interactive/outbreak_it/">italiano</a></span>
         </div>
         <div>
           <a href="https://twitter.com/Harry_Stevens">Harry Stevens</a>, du Washington Post, a récemment publié une <em>très</em> élégante simulation de la manière dont une maladie comme le COVID-19 se répend. Si vous ne l’avez pas déjà fait, je vous recommande vraiment d’y <a href="https://www.washingtonpost.com/graphics/2020/health/corona-simulator-french/">jeter un œil</a>.
