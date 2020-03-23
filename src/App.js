@@ -122,7 +122,7 @@ class App extends Component<Props, State> {
           />
         </Figure>
         <div>
-        Chaque carré représente une seule personne. La pauvre âme au centre, comme vous l’avez peut-être deviné, est {infected_singular}. Pendant ce temps, tous les autres sont {susceptible} de l’être.
+        Chaque carré représente une seule personne. Le pauvre âme au centre, comme vous l’avez peut-être deviné, est <code className="code-infectious">Contaminée</code>. Pendant ce temps, tous les autres sont {susceptible} de l’être.
         </div>
         <div>
           <h3>Temps</h3>
